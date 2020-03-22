@@ -114,5 +114,6 @@ for page in range(1, 11):
     driver.find_element_by_css_selector('a.qs-pageutil-next').click()
     print(df)
 
-
+df.to_excel('data.xlsx')
+os.startfile('data.xlsx')
 plt.show()
