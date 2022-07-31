@@ -10,8 +10,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox.options import Options
 
-driver = webdriver.Firefox(service_log_path=os.path.devnull)
+breakpoint()
+options = Options()
+options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+driver = webdriver.Firefox(options=options)
 driver.maximize_window()
 
 driver.get('http://finra-markets.morningstar.com/BondCenter/Results.jsp')
@@ -31,13 +35,13 @@ WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
 # select bond ratings
 WebDriverWait(driver, 10).until(EC.presence_of_element_located(
     (By.CSS_SELECTOR, 'select.range[name=moodysRating]')))
-Select((driver.find_elements_by_css_selector(
+Select((driver.find_elements(By.CSS_SELECTOR,
     'select.range[name=moodysRating]'))[0]).select_by_visible_text('A3')
-Select((driver.find_elements_by_css_selector(
+Select((driver.find_elements(By.CSS_SELECTOR,
     'select.range[name=moodysRating]'))[1]).select_by_visible_text('Aaa')
-Select((driver.find_elements_by_css_selector(
+Select((driver.find_elements(By.CSS_SELECTOR,
     'select.range[name=standardAndPoorsRating]'))[0]).select_by_visible_text('A-')
-Select((driver.find_elements_by_css_selector(
+Select((driver.find_elements(By.CSS_SELECTOR,
     'select.range[name=standardAndPoorsRating]'))[1]).select_by_visible_text('AAA')
 
 # click show results
@@ -47,7 +51,7 @@ WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
 # wait for results
 WebDriverWait(driver, 10).until(EC.presence_of_element_located(
     (By.CSS_SELECTOR, '.rtq-grid-row.rtq-grid-rzrow .rtq-grid-cell-ctn')))
-headers = [title.text for title in driver.find_elements_by_css_selector(
+headers = [title.text for title in driver.find_elements(By.CSS_SELECTOR,
     '.rtq-grid-row.rtq-grid-rzrow .rtq-grid-cell-ctn')[1:]]
 
 
@@ -59,10 +63,10 @@ for page in range(1, 11):
     WebDriverWait(driver, 10).until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, (f"a.qs-pageutil-btn.on[value='{str(page)}']"))))  # wait for page marker to be on expected page
     time.sleep(2)
-    tablerows = driver.find_elements_by_css_selector(
+    tablerows = driver.find_elements(By.CSS_SELECTOR,
         'div.rtq-grid-bd > div.rtq-grid-row')
     for tablerow in tablerows:
-        tablerowdata = tablerow.find_elements_by_css_selector(
+        tablerowdata = tablerow.find_elements(By.CSS_SELECTOR,
             'div.rtq-grid-cell')
         bond = [item.text for item in tablerowdata[1:]]
         print(bond)
@@ -111,7 +115,7 @@ for page in range(1, 11):
         plt.pause(.001)
 
     print('\npage completed...\n')
-    driver.find_element_by_css_selector('a.qs-pageutil-next').click()
+    driver.find_element(By.CSS_SELECTOR,'a.qs-pageutil-next').click()
     print(df)
 
 df.to_excel('data.xlsx')
