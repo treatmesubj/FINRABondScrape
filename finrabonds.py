@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 
-breakpoint()
+
 options = Options()
 options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
 driver = webdriver.Firefox(options=options)
