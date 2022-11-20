@@ -1,0 +1,17 @@
+POST /bondSearch.jsp HTTP/1.1
+Host: finra-markets.morningstar.com
+Cookie: qs_wsid=2781F4C3E9C5DC77E189342101B3F3CF;
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
+Accept: text/plain, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Content-Length: 326
+Origin: https://finra-markets.morningstar.com
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Te: trailers
+
+count=80&searchtype=B&query=%7B%22Keywords%22%3A%5B%7B%22Name%22%3A%22debtOrAssetClass%22%2C%22Value%22%3A%223%2C6%22%7D%2C%7B%22Name%22%3A%22showResultsAs%22%2C%22Value%22%3A%22B%22%7D%2C%7B%22Name%22%3A%22moodysRating%22%2C%22minValue%22%3A%221%22%2C%22maxValue%22%3A%227%22%7D%5D%7D&sortfield=issuerName&sorttype=1&start=1
